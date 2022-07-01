@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var sensorManagerAcelerometro: SensorManager
     private lateinit var sensorManagerMagnetometro: SensorManager
     private lateinit var textoAcelerometro: TextView
-    private lateinit var mensajeAcelerometro: TextView
+    private lateinit var mensajeSensores: TextView
     private lateinit var textoMagnetometro: TextView
-    private lateinit var mensajeMagnetometro: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +26,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         textoAcelerometro = findViewById(R.id.coordenadasAcelerometro)
-        mensajeAcelerometro = findViewById(R.id.mensajeAcelerometro)
+        mensajeSensores = findViewById(R.id.mensajeSensores)
         textoMagnetometro = findViewById(R.id.coordenadasMagnetometro)
-        mensajeMagnetometro = findViewById(R.id.mensajeMagnetometro)
         
         setUpSensorStuff()
     }
@@ -68,19 +66,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             textoAcelerometro.text =
                 "(ACELERÓMETRO)\nX = ${x.toInt()}\nY = ${y.toInt()}\nZ = ${z.toInt()}"
             if (x.toInt() == 9) {
-                mensajeAcelerometro.text = "Horizontal 2"
+                mensajeSensores.text = "Horizontal 2"
             }
             if (x.toInt() == -9) {
-                mensajeAcelerometro.text = "Horizontal 1"
+                mensajeSensores.text = "Horizontal 1"
             }
             if (y.toInt() == 9) {
-                mensajeAcelerometro.text = "Vertical 1"
+                mensajeSensores.text = "Vertical 1"
             }
             if (y.toInt() == -9) {
-                mensajeAcelerometro.text = "Vertical 2"
+                mensajeSensores.text = "Vertical 2"
             }
             if (x.toInt() in 1..8 || x.toInt() in -1 downTo -8 || y.toInt() in 1..8 || y.toInt() in -1 downTo -8) {
-                mensajeAcelerometro.text = "Girando"
+                mensajeSensores.text = "Girando"
             }
         }
 
@@ -95,7 +93,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 df.format(Math.sqrt((magX * magX) + (magY * magY) + (magZ * magZ).toDouble()))
 
             textoMagnetometro.text =
-                "(MAGNETÓMETRO)\nX = ${magX}\nY = ${magY}\nZ = ${magZ}\nValor = ${magnitude}"
+                "(MAGNETÓMETRO)\nX = ${magX.toInt()}\nY = ${magY.toInt()}\nZ = ${magZ.toInt()}\nValor = ${magnitude}"
         }
     }
 
